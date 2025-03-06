@@ -1,10 +1,14 @@
 import jsonServer from 'json-server';
 import fs from 'fs';
+import { join } from 'path';
 
 const server = jsonServer.create();
 
-// Instead of passing 'db.json', load it into memory:
-const dbData = JSON.parse(fs.readFileSync('./db.json', 'utf-8'));
+// Construct an absolute path to db.json
+const dbFilePath = join(process.cwd(), 'db.json');
+console.log('Loading db.json from:', dbFilePath);
+
+const dbData = JSON.parse(fs.readFileSync(dbFilePath, 'utf-8'));
 const router = jsonServer.router(dbData);
 
 const middlewares = jsonServer.defaults();
