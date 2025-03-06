@@ -1,15 +1,14 @@
-import jsonServer from 'json-server';
-
+const jsonServer = require('json-server');
 const server = jsonServer.create();
-const router = jsonServer.router('db.json'); // path to your db.json file
+const router = jsonServer.router('db.json'); // Path to your db.json file
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 3000;
 
-// Use default middlewares (logger, static, cors, and no-cache)
+// Use default middlewares (CORS, logging, etc.)
 server.use(middlewares);
-// Use default router
 server.use(router);
 
+// Listen on the given port
 server.listen(port, () => {
-  console.log(`JSON Server is running on port ${port}`);
+  console.log(`JSON Server is running on http://localhost:${port}`);
 });
